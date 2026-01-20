@@ -34,6 +34,8 @@ body{
 .main-nav{display:flex;gap:3.1rem;align-items:center}
 .main-nav a{color:var(--text);text-decoration:none;font-weight:600;font-size: 1.1rem;padding:0.45rem;border-radius:8px}
 .main-nav a:hover{background:var(--glass)}
+.menu-toggle{display:none;background:transparent;border:0;color:var(--text);font-size:1.25rem;padding:0.4rem;border-radius:8px}
+.menu-toggle:focus{outline:2px solid rgba(0,0,0,0.06)}
 .right{display:flex;gap:0.6rem;align-items:center}
 .btn{display:inline-block;padding:0.55rem 0.9rem;border-radius:10px;text-decoration:none;font-weight:700}
 .btn.small{padding:0.4rem 0.6rem}
@@ -183,6 +185,9 @@ h1{font-family:'Poppins', system-ui, sans-serif;font-size:2.75rem;margin:0 0 0.9
   .services-grid{grid-template-columns:1fr}
   .contact-inner{flex-direction:column}
   .main-nav{display:none}
+  .main-nav.open{display:flex;flex-direction:column;position:absolute;top:72px;right:1rem;background:var(--card);padding:0.75rem;border-radius:10px;box-shadow:0 12px 30px rgba(8,10,12,0.08)}
+  .main-nav.open a{padding:0.6rem 1rem}
+  .menu-toggle{display:inline-flex}
   .right{flex-direction:row}
   h1{font-size:1.8rem;line-height:1.1}
   .hero-ctas{flex-direction:column;gap:0.6rem}
