@@ -6,7 +6,7 @@
   <meta name="description" content="Amira Abdelhafeez — Frontend Developer & Designer. Portfolio." />
   <title>Amira Abdelhafeez — Portfolio</title>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -28,6 +28,7 @@
         <a href="#about">About</a>
         <a href="#services">Services</a>
         <a href="#portfolio">Portfolio</a>
+        <a href="#contact">Contact</a>
       </nav>
 
       <div class="right">
@@ -36,44 +37,49 @@
       </div>
     </div>
   </header>
-
-  <section class="hero band-pink">
+  <section class="hero">
     <div class="container hero-inner">
       <div class="hero-copy">
-        <p class="eyebrow">Frontend Developer</p>
-        <h1>Hi There, I’m <span class="name">Amira Abdelhafeez</span></h1>
-        <p class="hero-lead">Welcome to my portfolio of captivating digital experiences. Explore my work and let's create something extraordinary together.</p>
+        <span class="eyebrow"><i class="fas fa-star"></i> Frontend Developer & Designer</span>
+        <h1>Hi, I'm <span class="name">Amira Abdelhafeez</span></h1>
+        <p class="hero-lead">I create beautiful, intuitive digital experiences that blend creativity with functionality. Let's build something extraordinary together.</p>
         <div class="hero-ctas">
-          <a class="btn dark" href="#contact">Hire Me</a>
-          <a class="btn outline" href="#portfolio">Portfolio</a>
+          <a class="btn dark" href="#contact">
+            <i class="fas fa-envelope" style="margin-right:0.5rem"></i>
+            Get in Touch
+          </a>
+          <a class="btn outline" href="#portfolio">
+            <i class="fas fa-briefcase" style="margin-right:0.5rem"></i>
+            View Projects
+          </a>
         </div>
       </div>
 
-      <div class="hero-visual" aria-hidden="true">
+      <div class="hero-visual">
         <div class="visual-graphic">
-          <img src="img/Profile.jpeg" alt="Hero image" />
+          <img src="img/Profile.jpeg" alt="Amira Abdelhafeez - Frontend Developer" />
         </div>
       </div>
     </div>
   </section>
 
-  <section id="about" class="about dark-band">
+  <section id="about" class="about">
     <div class="container about-inner">
       <h2>About Me</h2>
-      <p class="about-lead">I'm Amira, a UI/UX and frontend designer dedicated to crafting intuitive and visually stunning digital experiences. With a passion for user-centered design, I transform ideas into functional and beautiful interfaces.</p>
+      <p class="about-lead">I'm Amira, a passionate frontend designer. I specialize in crafting intuitive, visually stunning digital experiences with a user-centered approach that transforms ideas into functional, beautiful interfaces.</p>
 
       <div class="counters">
         <div class="counter">
-          <div class="num">5</div>
-          <div class="label">Projects Done</div>
+          <div class="num">7+</div>
+          <div class="label">Projects Completed</div>
         </div>
         <div class="counter">
           <div class="num">2+</div>
-          <div class="label">Years of Experience</div>
+          <div class="label">Years Experience</div>
         </div>
         <div class="counter">
-          <div class="num">13+</div>
-          <div class="label">Clients Served</div>
+          <div class="num">80+</div>
+          <div class="label">Happy Clients</div>
         </div>
       </div>
     </div>
@@ -108,66 +114,160 @@
     </div>
   </section>
 
-  <section id="portfolio" class="portfolio band-pink-light">
+  <section id="portfolio" class="portfolio">
     <div class="container">
       <h2>My Portfolio</h2>
-      <p class="section-sub">Explore my design services and case studies.</p>
+      <p class="section-sub">Explore my latest projects and case studies showcasing design excellence and technical implementation.</p>
+      
+      <div class="portfolio-filters">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="web">Web Design</button>
+        <button class="filter-btn" data-filter="wordpress">WordPress</button>
+        <button class="filter-btn" data-filter="frontend">Frontend</button>
+      </div>
+
       <div class="portfolio-grid">
-        <article class="pf-card">
+        <article class="pf-card" data-category="web">
           <a class="pf-link" href="https://mawred-edu.com/" target="_blank" rel="noopener noreferrer">
-            <img src="img/mawred.png" alt="mawrededu">
-            <h3>Educational Platform</h3>
-            <p class="muted">Educational platform website focused on clear content structure and responsive design built with OpenCart.</p>
+            <div class="pf-image">
+              <img src="img/mawred.png" alt="Educational Platform">
+              <div class="pf-overlay">
+                <span class="pf-tag">OpenCart</span>
+              </div>
+            </div>
+            <div class="pf-content">
+              <h3>Educational Platform</h3>
+              <p>A comprehensive educational platform with intuitive content structure and fully responsive design. Built with OpenCart for seamless course management.</p>
+              <div class="pf-meta">
+                <span class="meta-item"><i class="fas fa-code"></i> Web Design</span>
+                <span class="meta-item"><i class="fas fa-eye"></i> Live Project</span>
+              </div>
+            </div>
           </a>
         </article>
 
-        <article class="pf-card">
+        <article class="pf-card" data-category="wordpress">
           <a class="pf-link" href="https://alwatad.net/" target="_blank" rel="noopener noreferrer">
-            <img src="img/alwatad.png" alt="Alwatad">
-            <h3>Alwatad Company</h3>
-            <p class="muted">Corporate website designed to present services with a clean and professional layout built with WordPress using Elementor and WooCommerce.</p>
+            <div class="pf-image">
+              <img src="img/alwatad.png" alt="Alwatad Company">
+              <div class="pf-overlay">
+                <span class="pf-tag">WordPress</span>
+              </div>
+            </div>
+            <div class="pf-content">
+              <h3>Alwatad Company</h3>
+              <p>Professional corporate website showcasing services with clean, modern design. Built with WordPress, Elementor, and WooCommerce integration.</p>
+              <div class="pf-meta">
+                <span class="meta-item"><i class="fas fa-wordpress"></i> WordPress</span>
+                <span class="meta-item"><i class="fas fa-eye"></i> Live Project</span>
+              </div>
+            </div>
           </a>
         </article>
 
-        <article class="pf-card">
+        <article class="pf-card" data-category="web">
           <a class="pf-link" href="https://amirahassann.github.io/Business-Landing-Page/" target="_blank" rel="noopener noreferrer">
-            <img src="img/business-landing.png" alt="Business landing">
-            <h3>Business landing page</h3>
-            <p class="muted">A responsive landing page for a business website built with HTML and CSS, focusing on clean UI, layout structure, and modern styling.</p>
+            <div class="pf-image">
+              <img src="img/business-landing.png" alt="Business Landing Page">
+              <div class="pf-overlay">
+                <span class="pf-tag">HTML & CSS</span>
+              </div>
+            </div>
+            <div class="pf-content">
+              <h3>Business Landing Page</h3>
+              <p>A responsive and modern landing page designed with clean UI principles. Features intuitive layout structure and contemporary styling.</p>
+              <div class="pf-meta">
+                <span class="meta-item"><i class="fas fa-code"></i> Frontend</span>
+                <span class="meta-item"><i class="fas fa-eye"></i> Live Project</span>
+              </div>
+            </div>
           </a>
         </article>
 
-        <article class="pf-card">
+        <article class="pf-card" data-category="web">
           <a class="pf-link" href="https://amirahassann.github.io/Books-Landing-page/" target="_blank" rel="noopener noreferrer">
-            <img src="img/books.png" alt="Books landing">
-            <h3>Books landing page</h3>
-            <p class="muted">A responsive landing page for a books website built with HTML and CSS, focusing on clean UI, layout structure, and modern styling.</p>
+            <div class="pf-image">
+              <img src="img/books.png" alt="Books Landing Page">
+              <div class="pf-overlay">
+                <span class="pf-tag">Responsive Design</span>
+              </div>
+            </div>
+            <div class="pf-content">
+              <h3>Books Landing Page</h3>
+              <p>An elegant landing page for book promotion with responsive layout. Showcases clean UI design and modern styling best practices.</p>
+              <div class="pf-meta">
+                <span class="meta-item"><i class="fas fa-code"></i> Web Design</span>
+                <span class="meta-item"><i class="fas fa-eye"></i> Live Project</span>
+              </div>
+            </div>
           </a>
         </article>
 
-        <article class="pf-card">
+        <article class="pf-card" data-category="frontend">
           <a class="pf-link" href="https://amirahassann.github.io/Water-Tracker/" target="_blank" rel="noopener noreferrer">
-            <img src="img/water.png" alt="Water Intake Tracker">
-            <h3>Water Intake Tracker</h3>
-            <p class="muted">A simple, responsive hydration tracker built with HTML, CSS, and vanilla JavaScript.</p>
+            <div class="pf-image">
+              <img src="img/water.png" alt="Water Intake Tracker">
+              <div class="pf-overlay">
+                <span class="pf-tag">JavaScript</span>
+              </div>
+            </div>
+            <div class="pf-content">
+              <h3>Water Intake Tracker</h3>
+              <p>A functional hydration tracking application. Built with vanilla JavaScript featuring real-time calculations and persistent data storage.</p>
+              <div class="pf-meta">
+                <span class="meta-item"><i class="fas fa-mobile-alt"></i> Web App</span>
+                <span class="meta-item"><i class="fas fa-eye"></i> Live Project</span>
+              </div>
+            </div>
           </a>
         </article>
 
-        <article class="pf-card">
+        <article class="pf-card" data-category="frontend">
           <a class="pf-link" href="https://amirahassann.github.io/Event-Countdown/" target="_blank" rel="noopener noreferrer">
-            <img src="img/event.png" alt="Event Countdown">
-            <h3>Event Countdown</h3>
-            <p class="muted">A simple, responsive event countdown timer built with HTML, CSS, and vanilla JavaScript.</p>
+            <div class="pf-image">
+              <img src="img/event.png" alt="Event Countdown">
+              <div class="pf-overlay">
+                <span class="pf-tag">JavaScript</span>
+              </div>
+            </div>
+            <div class="pf-content">
+              <h3>Event Countdown Timer</h3>
+              <p>A responsive countdown timer application. Demonstrates JavaScript expertise with real-time updates and elegant UI presentation.</p>
+              <div class="pf-meta">
+                <span class="meta-item"><i class="fas fa-mobile-alt"></i> Web App</span>
+                <span class="meta-item"><i class="fas fa-eye"></i> Live Project</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="pf-card" data-category="frontend">
+          <a class="pf-link" href="https://amirahassann.github.io/Clinic-Appointment-Booking/" target="_blank" rel="noopener noreferrer">
+            <div class="pf-image">
+              <img src="img/clinic.png" alt="Clinic Appointment Booking">
+              <div class="pf-overlay">
+                <span class="pf-tag">JavaScript</span>
+              </div>
+            </div>
+            <div class="pf-content">
+              <h3>Clinic Appointment Booking</h3>
+              <p>A full-featured appointment booking system with double-booking prevention. Built with vanilla JavaScript showcasing advanced functionality.</p>
+              <div class="pf-meta">
+                <span class="meta-item"><i class="fas fa-mobile-alt"></i> Web App</span>
+                <span class="meta-item"><i class="fas fa-eye"></i> Live Project</span>
+              </div>
+            </div>
           </a>
         </article>
       </div>
     </div>
   </section>
 
-  <section class="skills container">
-    <h2>My Skills</h2>
-    <p class="section-sub">Tools and technologies I use to create interactive web experiences.</p>
-    <div class="skills-grid">
+  <section class="skills">
+    <div class="container">
+      <h2>Technical Skills</h2>
+      <p class="section-sub">Tools and technologies I use to bring ideas to life.</p>
+      <div class="skills-grid">
       <div class="skill">
         <div class="skill-label">HTML <span>95%</span></div>
         <div class="skill-bar"><div style="width:95%"></div></div>
@@ -210,23 +310,32 @@
     </div>
   </section>
 
-  <section id="contact" class="contact band-pink">
+  <section id="contact" class="contact">
     <div class="container contact-inner">
       <div class="contact-left">
-        <h2>Get in Touch</h2>
-        <p class="muted">Have a question or a project in mind? I'd love to hear from you. Let's chat and make something amazing together.</p>
+        <h2>Let's Work Together</h2>
+        <p class="muted">Have a project in mind? I'd love to hear from you. Let's create something amazing together.</p>
 
         <ul class="contact-list">
-          <li><span class="icon">📞</span><span class="contact-text">+20 1030836336</span></li>
-          <li><span class="icon">✉️</span><a href="mailto:merahassn111@gmail.com" class="contact-text">merahassn111@gmail.com</a></li>
-          <li><span class="icon">📍</span><span class="contact-text">Sharqia-Zagazig, Egypt</span></li>
+          <li>
+            <span class="icon"><i class="fas fa-phone"></i></span>
+            <span class="contact-text">+20 1030836336</span>
+          </li>
+          <li>
+            <span class="icon"><i class="fas fa-envelope"></i></span>
+            <a href="mailto:merahassn111@gmail.com" class="contact-text">merahassn111@gmail.com</a>
+          </li>
+          <li>
+            <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
+            <span class="contact-text">Sharqia, Zagazig, Egypt</span>
+          </li>
         </ul>
 
         <div class="socials-small">
-          <a href="https://github.com/AmiraHassann" target="_blank"><i class="fab fa-github"></i></a>
-          <a href="https://www.linkedin.com/in/amira-hassan-902925378" target="_blank"><i class="fab fa-linkedin"></i></a>
-          <a href="https://www.facebook.com/amira.hassan.479896/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://wa.me/01030836336" target="_blank"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://github.com/AmiraHassann" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/amira-hassan-902925378" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="https://www.facebook.com/amira.hassan.479896/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://wa.me/01030836336" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
         </div>
       </div>
 
@@ -266,9 +375,14 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p class="muted">© 2025 Amira Abdelhafeez — All rights reserved</p>
+      <p>© 2026 Amira Abdelhafeez. All rights reserved.</p>
     </div>
   </footer>
+
+  <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
   <script src="script.js"></script>
 </body>
 </html>
