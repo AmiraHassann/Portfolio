@@ -165,6 +165,10 @@ h1, h2, h3{
   width: 100%;
 }
 
+.main-nav .mobile-only{
+  display: none;
+}
+
 .menu-toggle{
   display: none;
   background: transparent;
@@ -959,6 +963,10 @@ h1{
   
   .main-nav.open a:last-child{
     border-bottom: none;
+  }
+
+  .main-nav.open .mobile-only{
+    display: block;
   }
   
   .menu-toggle{
