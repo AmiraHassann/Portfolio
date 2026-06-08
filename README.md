@@ -1,37 +1,39 @@
-# Amira Abdelhafeez - Portfolio
+# Portfolio (React)
 
-A clean and modern portfolio website showcasing frontend development and design work.
+Minimal React + Vite conversion of a static portfolio site.
 
-## 🌟 Features
+Quick start
 
-- Responsive design that works on all devices
-- Clean and modern UI/UX
-- Portfolio showcase section
-- Skills visualization
-- Contact form
-- Social media integration
-
-## 🛠️ Technologies Used
-
-- HTML5
-- CSS3
-- Font Awesome Icons
-- Google Fonts (Poppins & Inter)
-
-## 📂 Project Structure
-
-```
-Portfolio/
-├── index.html          # Main HTML file
-├── styles.css          # Stylesheet
-├── img/               # Images folder
-└── README.md          # Project documentation
+```bash
+npm install
+npm run dev
 ```
 
-## 🚀 Getting Started
+Build
 
-1. Clone the repository
-2. Open `index.html` in your browser
-3. That's it!
+```bash
+npm run build
+npm run preview
+```
 
+Project overview
+
+- `index.html`, `styles.css`, `img/` (assets)
+- `src/main.jsx` mounts `App`
+- `src/components/` contains `Header`, `Hero`, `PortfolioGrid`, etc.
+
+Notes
+
+- Images currently live in `img/`. For production, consider moving them to `src/assets` and importing.
+- If VS Code terminal fails on Windows, see `.vscode/settings.json` (conpty fix).
+- To review reported vulnerabilities:
+
+```bash
+npm audit
+npm audit fix
+```
+
+If you'd like, I can move images into `src/assets`, update imports, and tidy the project for production.
 ---
+
+If you'd like, I can update the repository now to move images into `src/assets` and change imports (recommended). Tell me which next step you'd like.

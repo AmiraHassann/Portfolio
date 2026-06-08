@@ -471,7 +471,7 @@ h1{
 
 .portfolio-grid{
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 مشاريع جنبًا إلى جنب */
+  grid-template-columns: repeat(3, 1fr); /* 3 projects side-by-side */
   gap: 2.5rem;
 }
 
