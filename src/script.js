@@ -1,474 +1,64 @@
-// script.js — vanilla JS equivalent of previous React behavior
-import './styles.css'
 
-// Insert header and other static markup if needed are already in index.html
-
-// Menu toggle
-const menuToggle = document.getElementById('menuToggle')
-const mainNav = document.getElementById('mainNav')
-const header = document.querySelector('.site-header')
-
-if (menuToggle && mainNav) {
-  menuToggle.addEventListener('click', () => {
-    mainNav.classList.toggle('open')
-    menuToggle.innerHTML = mainNav.classList.contains('open')
-      ? '<i class="fa fa-times"></i>'
-      : '<i class="fa fa-bars"></i>'
-  })
-
-  mainNav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      mainNav.classList.remove('open')
-      menuToggle.innerHTML = '<i class="fa fa-bars"></i>'
-    })
-  })
-
-  document.addEventListener('click', (e) => {
-    if (!mainNav.contains(e.target) && !menuToggle.contains(e.target)) {
-      mainNav.classList.remove('open')
-      menuToggle.innerHTML = '<i class="fa fa-bars"></i>'
-    }
-  })
-}
-
-// Smooth scroll for internal links
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener('click', function (e) {
-    const targetId = this.getAttribute('href').slice(1)
-    if (!targetId) return
-    const target = document.getElementById(targetId)
-    if (target && header) {
-      e.preventDefault()
-      const headerHeight = header.offsetHeight
-      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight
-      window.scrollTo({ top: targetPosition, behavior: 'smooth' })
-    }
-  })
-})
-
-// Simple reveal on scroll
-const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = '1'
-      entry.target.style.transform = 'translateY(0)'
-    }
-  })
-}, observerOptions)
-
-document.querySelectorAll('.service, .pf-card, .counter').forEach(el => {
-  el.style.opacity = '0'
-  el.style.transform = 'translateY(30px)'
-  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease'
-  observer.observe(el)
-})
-
-// Skill bars animation
-const skillObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const bar = entry.target.querySelector('.skill-bar > div')
-      if (bar && !bar.classList.contains('animated')) {
-        bar.classList.add('animated')
-      }
-      skillObserver.unobserve(entry.target)
-    }
-  })
-}, { threshold: 0.5 })
-
-document.querySelectorAll('.skill').forEach(skill => skillObserver.observe(skill))
-
-// Counters
-const counterObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const counter = entry.target
-      const numElement = counter.querySelector('.num')
-      const target = parseInt(numElement?.textContent || '0')
-      if (numElement && !numElement.classList.contains('counted')) {
-        animateCounter(numElement, target)
-        numElement.classList.add('counted')
-      }
-      counterObserver.unobserve(counter)
-    }
-  })
-}, { threshold: 0.5 })
-
-document.querySelectorAll('.counter').forEach(counter => counterObserver.observe(counter))
-
-function animateCounter(element, target) {
-  let current = 0
-  const increment = target / 50
-  const suffix = element.textContent.replace(/[0-9]/g, '')
-  const timer = setInterval(() => {
-    current += increment
-    if (current >= target) {
-      element.textContent = target + suffix
-      clearInterval(timer)
-    } else {
-      element.textContent = Math.floor(current) + suffix
-    }
-  }, 30)
-}
-
-// Contact form handler
-const form = document.querySelector('form[aria-label="Contact form"]')
-if (form) {
-  const submitHandler = function (e) {
-    e.preventDefault()
-    const btn = form.querySelector('button[type="submit"]')
-    const originalText = btn.textContent
-    const originalBg = btn.style.background
-    btn.textContent = 'Sending...'
-    btn.disabled = true
-    setTimeout(() => {
-      btn.textContent = '✓ Message Sent!'
-      btn.style.background = '#10B981'
-      setTimeout(() => {
-        btn.textContent = originalText
-        btn.style.background = originalBg
-        btn.disabled = false
-        form.reset()
-      }, 2500)
-    }, 1000)
-  }
-  form.addEventListener('submit', submitHandler)
-}
 const PROJECTS = [
-  {
-    id: 1,
-    category: 'web',
-    tag: 'OpenCart',
-    title: 'Educational Platform',
-    description: 'A comprehensive educational platform with intuitive content structure and fully responsive design. Built with OpenCart for seamless course management.',
-    image: 'img/mawred.png',
-    link: 'https://mawred-edu.com/',
-    meta: [{ icon: 'fas fa-code', text: 'Web Design' }, { icon: 'fas fa-eye', text: 'Live Project' }]
-  },
-  {
-    id: 2,
-    category: 'wordpress',
-    tag: 'WordPress',
-    title: 'Alwatad Company',
-    description: 'Professional corporate website showcasing services with clean, modern design. Built with WordPress, Elementor, and WooCommerce integration.',
-    image: 'img/alwatad.png',
-    link: 'https://alwatad.net/',
-    meta: [{ icon: 'fas fa-wordpress', text: 'WordPress' }, { icon: 'fas fa-eye', text: 'Live Project' }]
-  },
-  {
-    id: 3,
-    category: 'web',
-    tag: 'HTML & CSS',
-    title: 'Business Landing Page',
-    description: 'A responsive and modern landing page designed with clean UI principles. Features intuitive layout structure and contemporary styling.',
-    image: 'img/business-landing.png',
-    link: 'https://amirahassann.github.io/Business-Landing-Page/',
-    meta: [{ icon: 'fas fa-code', text: 'Frontend' }, { icon: 'fas fa-eye', text: 'Live Project' }]
-  },
-  {
-    id: 4,
-    category: 'web',
-    tag: 'Responsive Design',
-    title: 'Books Landing Page',
-    description: 'An elegant landing page for book promotion with responsive layout. Showcases clean UI design and modern styling best practices.',
-    image: 'img/books.png',
-    link: 'https://amirahassann.github.io/Books-Landing-page/',
-    meta: [{ icon: 'fas fa-code', text: 'Web Design' }, { icon: 'fas fa-eye', text: 'Live Project' }]
-  },
-  {
-    id: 5,
-    category: 'frontend',
-    tag: 'JavaScript',
-    title: 'Water Intake Tracker',
-    description: 'A functional hydration tracking application. Built with vanilla JavaScript featuring real-time calculations and persistent data storage.',
-    image: 'img/water.png',
-    link: 'https://amirahassann.github.io/Water-Tracker/',
-    meta: [{ icon: 'fas fa-mobile-alt', text: 'Web App' }, { icon: 'fas fa-eye', text: 'Live Project' }]
-  },
-  {
-    id: 6,
-    category: 'frontend',
-    tag: 'JavaScript',
-    title: 'Event Countdown Timer',
-    description: 'A responsive countdown timer application. Demonstrates JavaScript expertise with real-time updates and elegant UI presentation.',
-    image: 'img/event.png',
-    link: 'https://amirahassann.github.io/Event-Countdown/',
-    meta: [{ icon: 'fas fa-mobile-alt', text: 'Web App' }, { icon: 'fas fa-eye', text: 'Live Project' }]
-  },
-  {
-    id: 7,
-    category: 'frontend',
-    tag: 'JavaScript',
-    title: 'Clinic Appointment Booking',
-    description: 'A full-featured appointment booking system with double-booking prevention. Built with vanilla JavaScript showcasing advanced functionality.',
-    image: 'img/clinic.png',
-    link: 'https://amirahassann.github.io/Clinic-Appointment-Booking-System/',
-    meta: [{ icon: 'fas fa-mobile-alt', text: 'Web App' }, { icon: 'fas fa-eye', text: 'Live Project' }]
-  },
-  {
-    id: 8,
-    category: 'frontend',
-    tag: 'FrontEnd',
-    title: 'Restaurant Ordering System',
-    description: 'A full-featured restaurant ordering system with real-time updates and seamless user experience. Built with vanilla JavaScript showcasing advanced functionality.',
-    image: 'img/restaurant.png',
-    link: 'https://amirahassann.github.io/Restaurant-Ordering-System/',
-    meta: [{ icon: 'fas fa-mobile-alt', text: 'Web App' }, { icon: 'fas fa-eye', text: 'Live Project' }]
-  }
+  { id: 1, 
+    category: 'web', tag: 'OpenCart', title: 'Educational Platform', 
+    description: 'A comprehensive educational platform with intuitive content structure and fully responsive design. Built with OpenCart for seamless course management.', 
+    image: 'img/mawred.png', link: 'https://mawred-edu.com/',
+    meta: [{ icon: 'fas fa-code', text: 'Web Design' }, { icon: 'fas fa-eye', text: 'Live Project' }] },
+  
+    { id: 2, 
+    category: 'wordpress', tag: 'WordPress', title: 'Alwatad Company', 
+    description: 'Professional corporate website showcasing services with clean, modern design. Built with WordPress, Elementor, and WooCommerce integration.', 
+    image: 'img/alwatad.png', link: 'https://alwatad.net/', 
+    meta: [{ icon: 'fas fa-wordpress', text: 'WordPress' }, { icon: 'fas fa-eye', text: 'Live Project' }] },
+  
+    { id: 3, 
+    category: 'web', tag: 'HTML & CSS', title: 'Business Landing Page', 
+    description: 'A responsive and modern landing page designed with clean UI principles. Features intuitive layout structure and contemporary styling.', 
+    image: 'img/business-landing.png', link: 'https://amirahassann.github.io/Business-Landing-Page/', 
+    meta: [{ icon: 'fas fa-code', text: 'Frontend' }, { icon: 'fas fa-eye', text: 'Live Project' }] },
+  
+    { id: 4, 
+    category: 'web', tag: 'Responsive Design', title: 'Books Landing Page', 
+    description: 'An elegant landing page for book promotion with responsive layout. Showcases clean UI design and modern styling best practices.', 
+    image: 'img/books.png', link: 'https://amirahassann.github.io/Books-Landing-page/', 
+    meta: [{ icon: 'fas fa-code', text: 'Web Design' }, { icon: 'fas fa-eye', text: 'Live Project' }] },
+  
+    { id: 5, 
+    category: 'frontend', tag: 'JavaScript', title: 'Water Intake Tracker', 
+    description: 'A functional hydration tracking application. Built with vanilla JavaScript featuring real-time calculations and persistent data storage.', 
+    image: 'img/water.png', link: 'https://amirahassann.github.io/Water-Tracker/', 
+    meta: [{ icon: 'fas fa-mobile-alt', text: 'Web App' }, { icon: 'fas fa-eye', text: 'Live Project' }] },
+  
+    { id: 6, 
+    category: 'frontend', tag: 'JavaScript', title: 'Event Countdown Timer', 
+    description: 'A responsive countdown timer application. Demonstrates JavaScript expertise with real-time updates and elegant UI presentation.', 
+    image: 'img/event.png', link: 'https://amirahassann.github.io/Event-Countdown/', 
+    meta: [{ icon: 'fas fa-mobile-alt', text: 'Web App' }, { icon: 'fas fa-eye', text: 'Live Project' }] },
+  
+    { id: 7, 
+    category: 'frontend', tag: 'JavaScript', title: 'Clinic Appointment Booking', 
+    description: 'A full-featured appointment booking system with double-booking prevention. Built with vanilla JavaScript showcasing advanced functionality.', 
+    image: 'img/clinic.png', link: 'https://amirahassann.github.io/Clinic-Appointment-Booking-System/', 
+    meta: [{ icon: 'fas fa-mobile-alt', text: 'Web App' }, { icon: 'fas fa-eye', text: 'Live Project' }] },
+  
+    { id: 8, 
+    category: 'frontend', tag: 'FrontEnd', title: 'Restaurant Ordering System', 
+    description: 'A full-featured restaurant ordering system with real-time updates and seamless user experience. Built with vanilla JavaScript showcasing advanced functionality.', 
+    image: 'img/restaurant.png', link: 'https://amirahassann.github.io/Restaurant-Ordering-System/', 
+    meta: [{ icon: 'fas fa-mobile-alt', text: 'Web App' }, { icon: 'fas fa-eye', text: 'Live Project' }] }
 ]
 
-function buildStaticMarkup() {
-  return `
-<header class="site-header">
-  <div class="container header-inner">
-    <div class="left">
-      <a class="logo" href="#" aria-label="Amira">
-        <span class="logo-mark">A</span>
-        <span class="logo-text">Amira</span>
-      </a>
-    </div>
-
-    <button id="menuToggle" class="menu-toggle" aria-label="Toggle navigation">
-      <i class="fa fa-bars" aria-hidden="true"></i>
-    </button>
-
-    <nav class="main-nav" id="mainNav">
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#contact">Contact</a>
-      <a class="mobile-only" href="CV.pdf" target="_blank" rel="noopener noreferrer">Download CV</a>
-    </nav>
-
-    <div class="right">
-      <a class="btn small outline" href="CV.pdf" target="_blank" rel="noopener noreferrer">Download CV</a>
-      <a class="btn small dark" href="#contact">Let's Talk</a>
-    </div>
-  </div>
-</header>
-
-<main>
-  <section class="hero">
-    <div class="container hero-inner">
-      <div class="hero-copy">
-        <span class="eyebrow"><i class="fas fa-star"></i> Frontend Developer & Designer</span>
-        <h1>Hi, I'm <span class="name">Amira Abdelhafeez</span></h1>
-        <p class="hero-lead">I create beautiful, intuitive digital experiences that blend creativity with functionality. Let's build something extraordinary together.</p>
-        <div class="hero-ctas">
-          <a class="btn dark" href="#contact">
-            <i class="fas fa-envelope" style="margin-right: 0.5rem"></i>
-            Get in Touch
-          </a>
-          <a class="btn outline" href="#portfolio">
-            <i class="fas fa-briefcase" style="margin-right: 0.5rem"></i>
-            View Projects
-          </a>
-        </div>
-      </div>
-
-      <div class="hero-visual">
-        <div class="visual-graphic">
-          <img src="img/Profile.jpeg" alt="Amira Abdelhafeez - Frontend Developer" />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="about" class="about">
-    <div class="container about-inner">
-      <h2>About Me</h2>
-      <p class="about-lead">I'm Amira, a passionate frontend designer. I specialize in crafting intuitive, visually stunning digital experiences with a user-centered approach that transforms ideas into functional, beautiful interfaces.</p>
-
-      <div class="counters">
-        <div class="counter">
-          <div class="num">7+</div>
-          <div class="label">Projects Completed</div>
-        </div>
-        <div class="counter">
-          <div class="num">2+</div>
-          <div class="label">Years Experience</div>
-        </div>
-        <div class="counter">
-          <div class="num">80+</div>
-          <div class="label">Happy Clients</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="services" class="services">
-    <div class="container">
-      <h2>Services</h2>
-      <p class="section-sub">From concept to code — explore my services and let’s build something amazing together.</p>
-      <div class="services-grid">
-        <div class="service">
-          <div class="icon"><i class="fas fa-code fa-2x"></i></div>
-          <h3>Frontend Development</h3>
-          <p>Building responsive and modern user interfaces using HTML, CSS, JavaScript, and React.</p>
-        </div>
-        <div class="service">
-          <div class="icon"><i class="fas fa-mobile-alt fa-2x"></i></div>
-          <h3>Responsive Web Design</h3>
-          <p>Creating mobile-first layouts that adapt smoothly across all screen sizes.</p>
-        </div>
-        <div class="service">
-          <div class="icon"><i class="fas fa-paint-brush fa-2x"></i></div>
-          <h3>UI Implementation</h3>
-          <p>Converting designs into clean, pixel-perfect frontend code with attention to detail.</p>
-        </div>
-        <div class="service">
-          <div class="icon"><i class="fab fa-wordpress fa-2x"></i></div>
-          <h3>WordPress Development</h3>
-          <p>Building custom WordPress themes and plugins with a focus on performance and usability.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="portfolio" class="portfolio">
-    <div class="container">
-      <h2>My Portfolio</h2>
-      <p class="section-sub">Explore my latest projects and case studies showcasing design excellence and technical implementation.</p>
-
-      <div class="portfolio-filters">
-        <button class="filter-btn active" data-filter="all">All Projects</button>
-        <button class="filter-btn" data-filter="web">Web Design</button>
-        <button class="filter-btn" data-filter="wordpress">WordPress</button>
-        <button class="filter-btn" data-filter="frontend">Frontend</button>
-      </div>
-
-      <div class="portfolio-grid"></div>
-    </div>
-  </section>
-
-  <section class="skills">
-    <div class="container">
-      <h2>Technical Skills</h2>
-      <p class="section-sub">Tools and technologies I use to bring ideas to life.</p>
-      <div class="skills-grid">
-        <div class="skill">
-          <div class="skill-label">HTML <span>95%</span></div>
-          <div class="skill-bar"><div style="width:95%"></div></div>
-        </div>
-
-        <div class="skill">
-          <div class="skill-label">CSS <span>90%</span></div>
-          <div class="skill-bar"><div style="width:90%"></div></div>
-        </div>
-
-        <div class="skill">
-          <div class="skill-label">JavaScript <span>75%</span></div>
-          <div class="skill-bar"><div style="width:75%"></div></div>
-        </div>
-
-        <div class="skill">
-          <div class="skill-label">React <span>70%</span></div>
-          <div class="skill-bar"><div style="width:70%"></div></div>
-        </div>
-
-        <div class="skill">
-          <div class="skill-label">Responsive Design <span>80%</span></div>
-          <div class="skill-bar"><div style="width:80%"></div></div>
-        </div>
-
-        <div class="skill">
-          <div class="skill-label">GitHub <span>85%</span></div>
-          <div class="skill-bar"><div style="width:85%"></div></div>
-        </div>
-
-        <div class="skill">
-          <div class="skill-label">WordPress <span>90%</span></div>
-          <div class="skill-bar"><div style="width:90%"></div></div>
-        </div>
-
-        <div class="skill">
-          <div class="skill-label">Figma <span>83%</span></div>
-          <div class="skill-bar"><div style="width:83%"></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="contact">
-    <div class="container contact-inner">
-      <div class="contact-left">
-        <h2>Let's Work Together</h2>
-        <p class="muted">Have a project in mind? I'd love to hear from you. Let's create something amazing together.</p>
-
-        <ul class="contact-list">
-          <li>
-            <span class="icon"><i class="fas fa-phone"></i></span>
-            <span class="contact-text">+20 1030836336</span>
-          </li>
-          <li>
-            <span class="icon"><i class="fas fa-envelope"></i></span>
-            <a href="mailto:merahassn111@gmail.com" class="contact-text">merahassn111@gmail.com</a>
-          </li>
-          <li>
-            <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
-            <span class="contact-text">Sharqia, Zagazig, Egypt</span>
-          </li>
-        </ul>
-
-        <div class="socials-small">
-          <a href="https://github.com/AmiraHassann" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-          <a href="https://www.linkedin.com/in/amira-hassan-902925378" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-          <a href="https://www.facebook.com/amira.hassan.479896/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://wa.me/01030836336" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        </div>
-      </div>
-
-      <div class="contact-form">
-        <div class="card">
-          <form action="#" method="post" aria-label="Contact form">
-            <div class="form-row">
-              <label class="form-field">
-                <span class="label-text">First name</span>
-                <input type="text" name="first" placeholder="First name" required />
-              </label>
-              <label class="form-field">
-                <span class="label-text">Email</span>
-                <input type="email" name="email" placeholder="Email" required />
-              </label>
-            </div>
-            <div class="form-row">
-              <label class="form-field">
-                <span class="label-text">Phone</span>
-                <input type="tel" name="phone" placeholder="Phone number" />
-              </label>
-              <label class="form-field">
-                <span class="label-text">Subject</span>
-                <input type="text" name="subject" placeholder="Subject" />
-              </label>
-            </div>
-            <label class="form-field">
-              <span class="label-text">Message</span>
-              <textarea name="message" rows="6" placeholder="Your message" required></textarea>
-            </label>
-            <button class="btn dark full" type="submit">Send Message</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>© 2026 Amira Abdelhafeez. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top">
-    <i class="fas fa-arrow-up"></i>
-  </button>
-</main>
-  `
-}
+document.addEventListener('DOMContentLoaded', () => {
+  renderProjects()
+  setupFilters()
+  initUIBehavior()
+})
 
 function renderProjects() {
   const grid = document.querySelector('.portfolio-grid')
   if (!grid) return
+  grid.innerHTML = ''
   PROJECTS.forEach(project => {
     const article = document.createElement('article')
     article.className = 'pf-card'
@@ -485,6 +75,8 @@ function renderProjects() {
     const img = document.createElement('img')
     img.src = project.image
     img.alt = project.title
+    img.loading = 'lazy'
+    img.decoding = 'async'
     imgWrap.appendChild(img)
 
     const content = document.createElement('div')
@@ -540,20 +132,10 @@ function initUIBehavior() {
   const mainNav = document.getElementById('mainNav')
   const header = document.querySelector('.site-header')
 
-  function handleDocClick(e) {
-    if (!mainNav || !menuToggle) return
-    if (!mainNav.contains(e.target) && !menuToggle.contains(e.target)) {
-      mainNav.classList.remove('open')
-      menuToggle.innerHTML = '<i class="fa fa-bars"></i>'
-    }
-  }
-
   if (menuToggle && mainNav) {
     menuToggle.addEventListener('click', () => {
       mainNav.classList.toggle('open')
-      menuToggle.innerHTML = mainNav.classList.contains('open')
-        ? '<i class="fa fa-times"></i>'
-        : '<i class="fa fa-bars"></i>'
+      menuToggle.innerHTML = mainNav.classList.contains('open') ? '<i class="fa fa-times"></i>' : '<i class="fa fa-bars"></i>'
     })
 
     mainNav.querySelectorAll('a').forEach(link => {
@@ -563,7 +145,12 @@ function initUIBehavior() {
       })
     })
 
-    document.addEventListener('click', handleDocClick)
+    document.addEventListener('click', (e) => {
+      if (!mainNav.contains(e.target) && !menuToggle.contains(e.target)) {
+        mainNav.classList.remove('open')
+        menuToggle.innerHTML = '<i class="fa fa-bars"></i>'
+      }
+    })
   }
 
   // Smooth scroll for internal links
@@ -581,7 +168,7 @@ function initUIBehavior() {
     })
   })
 
-  // Intersection observer animations
+  // Reveal on scroll
   const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -599,7 +186,7 @@ function initUIBehavior() {
     observer.observe(el)
   })
 
-  // Skill bars animation
+  // Skills
   const skillObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -611,7 +198,6 @@ function initUIBehavior() {
       }
     })
   }, { threshold: 0.5 })
-
   document.querySelectorAll('.skill').forEach(skill => skillObserver.observe(skill))
 
   // Counters
@@ -629,28 +215,12 @@ function initUIBehavior() {
       }
     })
   }, { threshold: 0.5 })
-
   document.querySelectorAll('.counter').forEach(counter => counterObserver.observe(counter))
 
-  function animateCounter(element, target) {
-    let current = 0
-    const increment = target / 50
-    const suffix = element.textContent.replace(/[0-9]/g, '')
-    const timer = setInterval(() => {
-      current += increment
-      if (current >= target) {
-        element.textContent = target + suffix
-        clearInterval(timer)
-      } else {
-        element.textContent = Math.floor(current) + suffix
-      }
-    }, 30)
-  }
-
-  // Contact form handler
+  // Contact form
   const form = document.querySelector('form[aria-label="Contact form"]')
   if (form) {
-    const submitHandler = function (e) {
+    form.addEventListener('submit', (e) => {
       e.preventDefault()
       const btn = form.querySelector('button[type="submit"]')
       const originalText = btn.textContent
@@ -667,11 +237,9 @@ function initUIBehavior() {
           form.reset()
         }, 2500)
       }, 1000)
-    }
-    form.addEventListener('submit', submitHandler)
+    })
   }
 
-  // Scroll to top
   const scrollBtn = document.getElementById('scrollToTop')
   if (scrollBtn) {
     scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }))
@@ -682,11 +250,18 @@ function initUIBehavior() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const root = document.getElementById('root')
-  if (!root) return
-  root.innerHTML = buildStaticMarkup()
-  renderProjects()
-  setupFilters()
-  initUIBehavior()
-})
+function animateCounter(element, target) {
+  let current = 0
+  const increment = target / 50
+  const suffix = element.textContent.replace(/[0-9]/g, '')
+  const timer = setInterval(() => {
+    current += increment
+    if (current >= target) {
+      element.textContent = target + suffix
+      clearInterval(timer)
+    } else {
+      element.textContent = Math.floor(current) + suffix
+    }
+  }, 30)
+}
+

@@ -1,39 +1,25 @@
-# Portfolio (React)
+# Portfolio
 
-Minimal React + Vite conversion of a static portfolio site.
+This is a static personal portfolio site (no React) built with:
 
-Quick start
+- `index.html` — full HTML markup
+- `styles.css` — global styles
+- `src/script.js` — vanilla JavaScript for UI behavior and project rendering
+- `img/` — image assets
 
-```bash
-npm install
-npm run dev
+
 ```
-
-Build
-
-```bash
-npm run build
-npm run preview
-```
-
-Project overview
-
-- `index.html`, `styles.css`, `img/` (assets)
-- `src/main.jsx` mounts `App`
-- `src/components/` contains `Header`, `Hero`, `PortfolioGrid`, etc.
 
 Notes
 
-- Images currently live in `img/`. For production, consider moving them to `src/assets` and importing.
-- If VS Code terminal fails on Windows, see `.vscode/settings.json` (conpty fix).
-- To review reported vulnerabilities:
+- The JavaScript now renders the portfolio cards into the existing DOM in `index.html`.
+- Images are stored in `img/`; project thumbnails are referenced from `src/script.js`.
+- If VS Code terminal on Windows errors when running `npm` (conpty), try PowerShell or Windows Terminal.
 
-```bash
-npm audit
-npm audit fix
-```
+Next steps you might want:
 
-If you'd like, I can move images into `src/assets`, update imports, and tidy the project for production.
----
+- Run the local build and verify `dist/` contains the site (`npm run build`).
+- Commit & push these changes to your repo.
+- Add GitHub Pages deploy (I can create a `gh-pages` script or a GitHub Action).
 
-If you'd like, I can update the repository now to move images into `src/assets` and change imports (recommended). Tell me which next step you'd like.
+Tell me which of the above to do next and I'll proceed.
